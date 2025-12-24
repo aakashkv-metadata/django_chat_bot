@@ -1,0 +1,248 @@
+:root {
+    --primary-color: #4F46E5;
+    --primary-light: #EEF2FF;
+    --text-color: #1F2937;
+    --text-secondary: #6B7280;
+    --border-color: #E5E7EB;
+    --bg-color: #F9FAFB;
+    --white: #FFFFFF;
+    --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.5;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Header */
+.main-header {
+    margin-bottom: 2rem;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.subtitle {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* Main Layout */
+.main-content {
+    display: flex;
+    gap: 2rem;
+    flex: 1;
+    min-height: 0; /* Important for scroll */
+}
+
+/* Upload Section */
+.upload-section {
+    width: 350px;
+    flex-shrink: 0;
+}
+
+.upload-section h2 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.description {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+}
+
+.drop-zone {
+    background: var(--white);
+    border: 2px dashed var(--border-color);
+    border-radius: 1rem;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.drop-zone:hover, .drop-zone.dragover {
+    border-color: var(--primary-color);
+    background: var(--primary-light);
+}
+
+.drop-zone-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.upload-icon {
+    color: var(--primary-color);
+}
+
+.drop-text {
+    font-weight: 500;
+}
+
+.browse-text {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.browse-link {
+    color: var(--primary-color);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.status-msg {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    text-align: center;
+}
+
+.status-msg.success { color: green; }
+.status-msg.error { color: red; }
+.status-msg.loading { color: var(--primary-color); }
+
+/* Chat Section */
+.chat-section {
+    flex: 1;
+    background: var(--white);
+    border-radius: 1rem;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-history {
+    flex: 1;
+    padding: 1.5rem;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.message {
+    display: flex;
+    gap: 1rem;
+    max-width: 80%;
+}
+
+.message.user-message {
+    flex-direction: row-reverse;
+    align-self: flex-end;
+}
+
+.message.ai-message {
+    align-self: flex-start;
+}
+
+.avatar {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.ai-message .avatar {
+    background: var(--primary-color);
+}
+
+.user-message .avatar {
+    background: var(--text-secondary);
+    display: none; /* Hide user avatar for cleaner look, optional */
+}
+
+.content {
+    padding: 1rem;
+    border-radius: 1rem;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+}
+
+.ai-message .content {
+    background: var(--bg-color);
+    border-top-left-radius: 0.25rem;
+}
+
+.user-message .content {
+    background: var(--primary-color);
+    color: var(--white);
+    border-top-right-radius: 0.25rem;
+}
+
+/* Chat Input */
+.chat-input-area {
+    padding: 1.5rem;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+#user-input {
+    flex: 1;
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 9999px;
+    outline: none;
+    font-size: 0.9375rem;
+    transition: border-color 0.2s;
+}
+
+#user-input:focus {
+    border-color: var(--primary-color);
+}
+
+#send-btn {
+    background: var(--primary-color);
+    color: var(--white);
+    border: none;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+}
+
+#send-btn:hover {
+    background: #4338CA;
+}
+
+.input-hint {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    padding: 0 1.5rem 1rem 1.5rem;
+}

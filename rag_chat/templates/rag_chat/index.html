@@ -1,0 +1,78 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumina - Intelligent RAG Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar / Header Area -->
+        <header class="main-header">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="#4F46E5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>Lumina</span>
+            </div>
+            <p class="subtitle">Your intelligent RAG assistant</p>
+        </header>
+
+        <main class="main-content">
+            <!-- Upload Section -->
+            <section class="upload-section">
+                <h2>Upload Documents</h2>
+                <p class="description">Upload PDF files to create your knowledge base</p>
+                
+                <div class="drop-zone" id="drop-zone">
+                    <div class="drop-zone-content">
+                        <svg class="upload-icon" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+                        </svg>
+                        <p class="drop-text">Drag & drop PDFs here</p>
+                        <p class="browse-text">or <span class="browse-link" id="browse-link">click to browse</span></p>
+                        <input type="file" id="file-input" accept=".pdf" hidden>
+                    </div>
+                </div>
+                <div id="upload-status" class="status-msg"></div>
+            </section>
+
+            <!-- Chat Section -->
+            <section class="chat-section">
+                <div class="chat-history" id="chat-history">
+                    <!-- Welcome Message -->
+                    <div class="message ai-message">
+                        <div class="avatar">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="10" rx="2" />
+                                <circle cx="12" cy="5" r="2" />
+                                <path d="M12 7v4" />
+                                <line x1="8" y1="16" x2="8" y2="16" />
+                                <line x1="16" y1="16" x2="16" y2="16" />
+                            </svg>
+                        </div>
+                        <div class="content">
+                            Hello! I'm Lumina, your friendly AI assistant. Upload some PDF documents and I'll help you understand them.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <input type="text" id="user-input" placeholder="Ask me anything about your documents..." autocomplete="off">
+                    <button id="send-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
+                        </svg>
+                    </button>
+                </div>
+                <p class="input-hint">Upload a PDF document to start chatting</p>
+            </section>
+        </main>
+    </div>
+    <script src="{% static 'js/main.js' %}"></script>
+</body>
+</html>
