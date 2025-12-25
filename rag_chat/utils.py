@@ -1,16 +1,30 @@
 import os
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
-from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.vectorstores import Chroma
 from django.conf import settings
 import requests
 from dotenv import load_dotenv
+from chromadb.utils import embedding_functions
 
 load_dotenv()
 
-# Initialize Embeddings (Local to save cost/latency for embeddings)
-embedding_function = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+# --- Custom Embedding Adapter for Memory Efficiency ---
+# We use Chroma's default ONNX-based embedding (all-MiniLM-L6-v2) 
+# instead of 'sentence-transformers' (PyTorch) to avoid OOM on Render free tier.
+
+class ChromaEmbeddingAdapter:
+    def __init__(self):
+        self.ef = embedding_functions.DefaultEmbeddingFunction()
+
+    def embed_documents(self, texts):
+        return self.ef(texts)
+
+    def embed_query(self, text):
+        return self.ef([text])[0]
+
+# Initialize Embeddings
+embedding_function = ChromaEmbeddingAdapter()
 
 # Initialize ChromaDB
 PERSIST_DIRECTORY = os.path.join(settings.BASE_DIR, 'chroma_db')
@@ -33,7 +47,7 @@ def ingest_document(file_path):
     
     db = get_db()
     db.add_documents(texts)
-    db.persist()
+    # db.persist() is automatic in newer Chroma versions
     return True
 
 def query_perplexity(query, context):
